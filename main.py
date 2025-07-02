@@ -26,25 +26,45 @@ def show_menu():
     print("4. Keluar")
     print("=" * 33)
 def main():
-    print("=== TOOLS ENKRIPSI MD5 PYTHON ===")
-    print("1. Enkripsi teks ke MD5")
-    print("2. Cek apakah teks cocok dengan hash MD5")
-    choice = input("Pilih menu (1/2): ")
+    while True:
+        show_menu()
+        choice = input("Pilih menu (1/2/3/4): ")
 
-    if choice == '1':
-        text = input("Masukkan teks yang ingin dienkripsi: ")
-        hash_result = generate_md5(text)
-        print(f"MD5 Hash: {hash_result}")
+        if choice == '1':
+            text = input("Masukkan teks: ")
+            result = md5_from_text(text)
+            print("MD5 Hash:", result)
+            simpan = input("Simpan ke file? (y/n): ").lower()
+            if simpan == 'y':
+                fname = save_to_file(f"Teks: {text}\nMD5: {result}")
+                print(f"Hasil disimpan di: {fname}")
 
-    elif choice == '2':
-        text = input("Masukkan teks asli: ")
-        md5_hash = input("Masukkan hash MD5: ")
-        if compare_md5(text, md5_hash):
-            print("✅ Teks cocok dengan hash MD5!")
+        elif choice == '2':
+            file_path = input("Masukkan path file: ")
+            result, error = md5_from_file(file_path)
+            if error:
+                print("❌ Error:", error)
+            else:
+                print("MD5 Hash:", result)
+                simpan = input("Simpan ke file? (y/n): ").lower()
+                if simpan == 'y':
+                    fname = save_to_file(f"File: {file_path}\nMD5: {result}")
+                    print(f"Hasil disimpan di: {fname}")
+
+        elif choice == '3':
+            text = input("Masukkan teks asli: ")
+            md5_input = input("Masukkan hash MD5: ")
+            if compare_md5(text, md5_input):
+                print("✅ Cocok! Teks sesuai dengan hash.")
+            else:
+                print("❌ Tidak cocok.")
+
+        elif choice == '4':
+            print("Terima kasih! Keluar...")
+            break
+
         else:
-            print("❌ Teks TIDAK cocok dengan hash MD5.")
-    else:
-        print("Pilihan tidak valid.")
+            print("Pilihan tidak valid. Coba lagi.")
 
 if __name__ == "__main__":
     main()
