@@ -18,6 +18,13 @@ def save_to_file(content, filename="md5_result.txt"):
 def compare_md5(text, hash_to_compare):
     return generate_md5(text) == hash_to_compare.lower()
 
+def show_menu():
+    print("\n====== TOOLS MD5 PYTHON ======")
+    print("1. Enkripsi teks ke MD5")
+    print("2. Enkripsi file ke MD5")
+    print("3. Cek kecocokan teks dengan hash MD5")
+    print("4. Keluar")
+    print("=" * 33)
 def main():
     print("=== TOOLS ENKRIPSI MD5 PYTHON ===")
     print("1. Enkripsi teks ke MD5")
