@@ -1,7 +1,15 @@
 import hashlib
 
-def generate_md5(text):
+def md5_from_text(text):
     return hashlib.md5(text.encode()).hexdigest()
+
+def md5_from_file(file_path):
+    if not os.path.isfile(file_path):
+        return None, "File tidak ditemukan."
+    with open(file_path, "rb") as f:
+        data = f.read()
+        hash_result = hashlib.md5(data).hexdigest()
+    return hash_result, None
 
 def compare_md5(text, hash_to_compare):
     return generate_md5(text) == hash_to_compare.lower()
