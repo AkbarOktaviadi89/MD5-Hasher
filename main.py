@@ -11,6 +11,10 @@ def md5_from_file(file_path):
         hash_result = hashlib.md5(data).hexdigest()
     return hash_result, None
 
+def save_to_file(content, filename="md5_result.txt"):
+    with open(filename, "w") as f:
+        f.write(content)
+    return filename
 def compare_md5(text, hash_to_compare):
     return generate_md5(text) == hash_to_compare.lower()
 
